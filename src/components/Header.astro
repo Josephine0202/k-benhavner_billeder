@@ -1,5 +1,40 @@
 ---
+import Link from '../components/Link.astro'
 ---
-<div>
-Header - tilføj navigation mm.
+<div x-data="{ showmenu: false }" class="p-4 fixed lg:static w-full z-10 bg-red-950 text-white">
+  <div id="navbar" class="flex flex-row justify-between">
+    <div id="logo" class="animate-pulse">
+      <a href="#navbar" class="">Københavnerbilleder</a>
+    </div>
+
+    <nav id="desktopmenu" class="hidden lg:block">
+      <ul class="flex flex-row gap-4">
+        <li><Link href="#bogen" class="text-white hover:opacity-50 transition duration-300">Om bogen</Link></li>
+        <li><Link href="#kapitlerne" class="text-white hover:opacity-50 transition duration-300">Kapitlerne</Link></li>
+        <li><Link href="#pressen" class="text-white hover:opacity-50 transition duration-300">Pressen siger</Link></li>
+        <li><Link href="#galleri" class="text-white hover:opacity-50 transition duration-300">Galleri</Link></li>
+        <li><Link href="#forfatteren" class="text-white hover:opacity-50 transition duration-300">Forfatteren</Link></li>
+        <li><Link href="#køb_bogen" class="text-white hover:opacity-50 transition duration-300">Køb bogen</Link></li>
+      </ul>
+    </nav>
+
+    <button id="burgermenu" class="lg:hidden" x-on:click="showmenu = ! showmenu">Menu</button>
+  </div>
+
+  <nav id="mobilmenu" class="flex flex-col content-center pt-4"
+    x-show="showmenu"
+    x-transition
+    x-on:click="showmenu = false"
+    x-on:click.outside="showmenu = false">
+    <ul>
+      <li><Link href="#bogen" class="text-white hover:opacity-50 transition duration-300" x-on:click="showmenu = false">Om bogen</Link></li>
+      <li><Link href="#kapitlerne" class="text-white hover:opacity-50 transition duration-300" x-on:click="showmenu = false">Kapitlerne</Link></li>
+      <li><Link href="#pressen" class="text-white hover:opacity-50 transition duration-300" x-on:click="showmenu = false">Pressen siger</Link></li>
+      <li><Link href="#galleri" class="text-white hover:opacity-50 transition duration-300" x-on:click="showmenu = false">Galleri</Link></li>
+      <li><Link href="#forfatteren" class="text-white hover:opacity-50 transition duration-300" x-on:click="showmenu = false">Forfatteren</Link></li>
+      <li><Link href="#køb_bogen" class="text-white hover:opacity-50 transition duration-300" x-on:click="showmenu = false">Køb bogen</Link></li>
+    </ul>
+  </nav>
 </div>
+
+

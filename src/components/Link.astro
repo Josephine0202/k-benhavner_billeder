@@ -1,5 +1,26 @@
 ---
 // Henter parametrene fra Astro.props
-const { href="#", target="_self"} = Astro.props; 
+const { href="#", target="_self", variant="textlink", size="inline" } = Astro.props; 
+
+// Definer den styling (Tailwind classes), der gælder for alle links
+const linkStyling = "text-white hover:opacity-50 transition duration-300"; 
+
+// Definer den styling (Tailwind classes), der gælder for de forskellige varianter 
+const variantClasses = {
+    "textlink": "underline",
+    "primary": "bg-red-950 hover:bg-zinc-300 border border-black text-center text-white text-sm animate-bounce",
+    "secondary": "bg-lime-500 hover:bg-lime-700"
+};
+
+// Definer den styling (Tailwind classes), der gælder for de forskellige størrelser
+const sizeClasses = {
+    "inline": "",
+    "large": "p-6",
+    "medium": "p-4",
+    "small": "p-2"
+};
 ---
-<a href={href} class="underline" target={target}><slot /></a>
+<!-- Sæt classes for links sammen ved hjælp af Astros class:list -->
+<a href={href} target={target} class:list={[linkStyling, variantClasses[variant], sizeClasses[size]]}>
+  <slot />
+</a>
